@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "trackifier": {
+      "hosting": {
+        "trackifier": [
+          "trackifier"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "trackifier"
+  }
+}

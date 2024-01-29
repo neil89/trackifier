@@ -97,8 +97,28 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "trackifier:build:production",
+              "serveTarget": "trackifier:serve:production"
+            },
+            "development": {
+              "buildTarget": "trackifier:build:development",
+              "serveTarget": "trackifier:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c60c5152-5b85-433c-b13a-a98fa8e7aec0"
   }
 }
