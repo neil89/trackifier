@@ -10,7 +10,7 @@ section {
   padding-bottom: 1rem;
 
   div.today-column {
-    padding: 0 0.375rem;
+    padding: 0.35rem 0.65rem;
   }
 
 
@@ -19,6 +19,7 @@ section {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    gap: 0.25rem;
 
     form {
       max-height: var(--row-height);

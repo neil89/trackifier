@@ -6,12 +6,17 @@ import { RangeTimeSelectorComponent } from '@components/timer-main-dashboard/ran
 import * as TimerMainDashboardActions from './store/index';
 
 import { TimerMainDashboardState } from 'src/app/models/timer-main-dashboard.model';
+import { TimerGridComponent } from '@app/components/timer-main-dashboard/timer-grid/timer-grid.component';
 
 
 @Component({
   selector: 'app-timer-main-dashboard',
   standalone: true,
-  imports: [TimeViewFiltersComponent, RangeTimeSelectorComponent],
+  imports: [
+    TimeViewFiltersComponent,
+    RangeTimeSelectorComponent,
+    TimerGridComponent
+  ],
   templateUrl: './timer-main-dashboard.component.html',
   styleUrl: './timer-main-dashboard.component.scss'
 })

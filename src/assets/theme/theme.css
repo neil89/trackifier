@@ -1,8 +1,9 @@
 :root {
-  font-family: "Moulpali", sans-serif;
+  font-family: "PTSansNarrow-Regular", sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   font-variation-settings: normal;
-  --font-family: "Moulpali", sans-serif;
+  --font-family: "PTSansNarrow-Regular", sans-serif;
+  --font-family-bold: "PTSansNarrow-Bold", sans-serif;
   --font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   --surface-a: #ffffff;
   --surface-b: #f9fafb;
@@ -63,14 +64,22 @@
 }
 
 @font-face {
-  font-family: "Moulpali";
+  font-family: "PTSansNarrow-Regular";
   font-weight: 400;
   font-display: swap;
   font-style: normal;
   font-named-instance: "Regular";
-  src: url("./fonts/Moulpali-Regular.woff2") format("woff2");
+  src: url("./fonts/PTSansNarrow-Regular.woff2") format("woff2");
 }
 
+@font-face {
+  font-family: "PTSansNarrow-Bold";
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: "Bold";
+  src: url("./fonts/PTSansNarrow-Bold.woff2") format("woff2");
+}
 
 :root {
   --blue-50:#f5f9ff;
@@ -1861,7 +1870,7 @@
     color: #ffffff;
     background: #14b8a6;
     border: 1px solid #14b8a6;
-    padding: 0.75rem 1.25rem;
+    padding: 0.85rem 1.25rem;
     font-size: 1rem;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }

@@ -1,4 +1,7 @@
 <main>
   <app-time-view-filters [currentDate]="currentDate"/>
   <app-range-time-selector (updateDates)="updateDatesOnStore($event)"/>
+  <section>
+    <app-timer-grid [selectedDate]="updateDates.selectedDate"/>
+  </section>
 </main>

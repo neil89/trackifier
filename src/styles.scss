@@ -16,6 +16,15 @@
 }
 
 /* ----- */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.bold {
+  font-family: var(--font-family-bold) !important;
+}
+
 .button__icon_large button span::before {
   font-size: 1.5rem;
 }
