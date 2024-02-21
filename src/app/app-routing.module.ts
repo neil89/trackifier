@@ -7,10 +7,23 @@ const routes: Routes = [
     path: '',
     component: TimerMainDashboardComponent
   },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
+  // IMPORT ROUTES
   // {
   //   path: 'new-game',
-  //   loadChildren: () => import('./new-game/new-game.module').then( m => m.NewGameModule )
+  //   loadChildren: () => import('./new-game/new-game.module')
+  //     .then( m => m.NewGameModule )
   // },
+  // IMPORT COMPONENT
+  // {
+  //   path: 'new-game',
+  //   loadComponent: () => import('.../time.component')
+  //     .then(c => c.TimeComponent)
+  // }
 ];
 
 @NgModule({
