@@ -1,0 +1,15 @@
+::ng-deep app-range-time-selector section {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+::ng-deep app-range-time-selector section form {
+  position: absolute;
+}
+::ng-deep app-range-time-selector section form input.p-inputtext {
+  width: 184px;
+  opacity: 0;
+  cursor: pointer;
+}

@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/primeng.min.css";
+@import "./assets/theme/theme.css";
+@import "primeicons/primeicons.css";
+
+/* COLOR UTILITIES */
+.coral-container {
+  background-color: var(--primary-300);
+}
+
+.coral-text {
+  color: var(--primary-100);
+}
+
+.royal-blue-container {
+  background-color: var(--accent-200);
+}
+
+/* ----- */
+.button__icon_large button span::before {
+  font-size: 1.5rem;
+}
+.button__icon_very-large button span::before {
+  font-size: 2rem;
+}

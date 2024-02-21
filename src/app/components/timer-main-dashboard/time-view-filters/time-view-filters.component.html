@@ -1,0 +1,25 @@
+<section>
+  <div class="today-column coral-container">
+    <span class="coral-text">Hoy: {{ currentDateLx?.toLocaleString() }}</span>
+  </div>
+  <div class="time-counter-column">
+    <span>
+      <i class="pi pi-filter"></i>
+      Total semana: {{ totalTimeWeek | duration }}
+    </span>
+    <div class="project-filter">
+      <form [formGroup]="formGroup">
+        <p-autoComplete
+          formControlName="selectedProject"
+          [suggestions]="filteredProjecs"
+          [dropdown]="true"
+          [minLength]="1"
+          [showEmptyMessage]="true"
+          [autoHighlight]="true"
+          field="name"
+          (completeMethod)="projectSelected($event)"
+        ></p-autoComplete>
+      </form>
+    </div>
+  </div>
+</section>

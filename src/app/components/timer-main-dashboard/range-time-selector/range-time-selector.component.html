@@ -1,0 +1,28 @@
+<section>
+  <p-button
+    class="button__icon_large"
+    severity="dark-accent"
+    icon="pi pi-angle-left"
+    (click)="previousWeek()"
+  ></p-button>
+
+  <p-button
+    severity="accent"
+    [label]="getRangeTime()"
+  ></p-button>
+  <form [formGroup]="formGroup">
+    <p-calendar
+      overlayVisible="true"
+      [firstDayOfWeek]="1"
+      formControlName="calendarDate"
+      (onSelect)="onSelect($event)"
+    ></p-calendar>
+  </form>
+
+  <p-button
+    class="button__icon_large"
+    severity="dark-accent"
+    icon="pi pi-angle-right"
+    (click)="nextWeek()"
+  ></p-button>
+</section>
