@@ -1,11 +1,13 @@
 <section>
   <div class="today-column coral-container">
-    <span class="coral-text bold">Hoy: {{ currentDateLx?.toLocaleString() }}</span>
+    <span class="coral-text bold">
+      {{ 'timerMainDashboard.TODAY' | translate }}: {{ currentDateLx?.toLocaleString() }}
+    </span>
   </div>
   <div class="time-counter-column">
     <span>
       <i class="pi pi-filter"></i>
-      Total semana: {{ totalTimeWeek | duration }}
+      {{ 'timerMainDashboard.TOTAL-WEEK' | translate }}: {{ totalTimeWeek | duration }}
     </span>
     <div class="project-filter">
       <form [formGroup]="formGroup">

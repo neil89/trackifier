@@ -1,20 +1,30 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-timer-grid',
   standalone: true,
-  imports: [DatePipe],
+  imports: [
+    DatePipe,
+    TitleCasePipe,
+    TranslateModule
+  ],
   templateUrl: './timer-grid.component.html',
   styleUrl: './timer-grid.component.scss'
 })
 export class TimerGridComponent implements OnInit {
 
   @Input({required: true}) public selectedDate!: Date;
+  locale: string = 'en';
 
   scheduleTime = new Array<string>(15);
 
-  constructor() {
+  constructor(
+    private translate: TranslateService
+  ) {
+    this.locale = this.translate.currentLang;
   }
 
   ngOnInit() {

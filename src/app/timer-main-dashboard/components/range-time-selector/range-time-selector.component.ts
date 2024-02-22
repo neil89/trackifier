@@ -13,7 +13,7 @@ import { TimerMainDashboardState } from '@models/timer-main-dashboard.model';
   imports: [
     ButtonModule,
     CalendarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './range-time-selector.component.html',
   styleUrl: './range-time-selector.component.scss'

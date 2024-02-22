@@ -1,7 +1,7 @@
 <section class="grid">
   <div class="header"></div>
   <div class="header bold">
-    <h3>{{selectedDate | date:'EEEE dd/LL'}}</h3>
+    <h3>{{selectedDate | date:'EEEE dd/LL':undefined:locale | titlecase}}</h3>
   </div>
   @for (time of scheduleTime; track time) {
     <div>

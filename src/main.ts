@@ -1,3 +1,5 @@
+/// <reference types="@angular/localize" />
+
 import { importProvidersFrom } from '@angular/core';
 import { AppComponent } from './app/app.component';
 import { provideFunctions, getFunctions } from '@angular/fire/functions';
@@ -9,10 +11,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 import { AppRoutingModule } from './app/app-routing.module';
-import { timerMainDashboardReducer } from '@containers/timer-main-dashboard/store/reducers/timer-main-dashboard.reducer';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { timerMainDashboardReducer } from '@app/timer-main-dashboard/store/reducers/timer-main-dashboard.reducer';
 
 const ngrxModules = [
   StoreModule.forRoot({
@@ -39,16 +44,30 @@ const firebaseModules = [
   provideFunctions(() => getFunctions())
 ];
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
+export const provideTranslation = () => ({
+  loader: {
+    provide: TranslateLoader,
+    useFactory: HttpLoaderFactory,
+    deps: [HttpClient]
+  }
+})
+
 bootstrapApplication(AppComponent, {
     providers: [
+        importProvidersFrom(HttpClientModule),
         importProvidersFrom(
           BrowserModule,
           AppRoutingModule,
+          TranslateModule.forRoot(provideTranslation()),
           ...ngrxModules,
           ...firebaseModules
         ),
         provideAnimations(),
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient()
     ],
 })
   .catch(err => console.error(err));

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { TimeViewFiltersComponent } from '@components/timer-main-dashboard/time-view-filters/time-view-filters.component';
-import { RangeTimeSelectorComponent } from '@components/timer-main-dashboard/range-time-selector/range-time-selector.component';
-import * as TimerMainDashboardActions from './store/index';
-
-import { TimerMainDashboardState } from 'src/app/models/timer-main-dashboard.model';
-import { TimerGridComponent } from '@app/components/timer-main-dashboard/timer-grid/timer-grid.component';
+import {
+  TimeViewFiltersComponent,
+  RangeTimeSelectorComponent,
+  TimerGridComponent,
+} from '../components';
+import * as TimerMainDashboardActions from '../store/index';
+import { TimerMainDashboardState } from '@models/timer-main-dashboard.model';
 
 
 @Component({

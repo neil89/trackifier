@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TimerMainDashboardComponent } from './containers/timer-main-dashboard/timer-main-dashboard.component';
+import { TimerMainDashboardComponent } from './timer-main-dashboard/container/timer-main-dashboard.component';
 
 const routes: Routes = [
   {

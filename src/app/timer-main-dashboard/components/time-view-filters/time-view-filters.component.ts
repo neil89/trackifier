@@ -6,6 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { DurationPipe } from '@pipes/duration.pipe';
 import { Project } from '@models/project.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 interface AutoCompleteCompleteEvent {
@@ -20,7 +21,8 @@ interface AutoCompleteCompleteEvent {
     AutoCompleteModule,
     ReactiveFormsModule,
     DatePipe,
-    DurationPipe
+    DurationPipe,
+    TranslateModule
   ],
   templateUrl: './time-view-filters.component.html',
   styleUrl: './time-view-filters.component.scss'
