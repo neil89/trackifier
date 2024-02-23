@@ -4,7 +4,11 @@
   },
   "timerMainDashboard": {
     "TODAY": "Hoy",
-    "TOTAL-WEEK": "Total semana"
+    "TOTAL-WEEK": "Total semana",
+    "TRACK-TASK-TITLE": "Registrar tarea",
+    "START-TIME": "Hora inicio",
+    "END-TIME": "Hora fin",
+    "DURATION": "Duración"
   },
   "primeNg": {
     "startsWith": "Comience con",

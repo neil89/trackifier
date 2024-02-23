@@ -1,0 +1,43 @@
+.track-task {
+
+  --row-height: 36px;
+  --input-mask-width: 80px;
+
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    width: 100%;
+
+    .tags-and-duration {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+    }
+
+    ::ng-deep {
+
+      p-button button {
+        width: var(--row-height);
+        height: var(--row-height);
+      }
+
+      p-autocomplete.accent {
+        display: block;
+        width: 100%;
+
+        .p-autocomplete {
+          width: 100%;
+        }
+      }
+      p-inputmask .p-inputtext {
+        width: var(--input-mask-width);
+        height: var(--row-height);
+      }
+    }
+  }
+}

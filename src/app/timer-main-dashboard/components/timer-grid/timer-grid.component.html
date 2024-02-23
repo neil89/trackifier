@@ -7,6 +7,31 @@
     <div>
       {{ time }}
     </div>
-    <div></div>
+    <div class="quarters-container">
+      <div
+        class="quarter"
+        data-division="0"
+        [attr.data-hour]="time"
+        (click)="show($event)"
+      ></div>
+      <div
+        class="quarter"
+        data-division="15"
+        [attr.data-hour]="time"
+        (click)="show($event)"
+      ></div>
+      <div
+        class="quarter"
+        data-division="30"
+        [attr.data-hour]="time"
+        (click)="show($event)"
+      ></div>
+      <div
+        class="quarter"
+        data-division="45"
+        [attr.data-hour]="time"
+        (click)="show($event)"
+      ></div>
+    </div>
   }
 </section>

@@ -12,6 +12,7 @@
     <div class="project-filter">
       <form [formGroup]="formGroup">
         <p-autoComplete
+          class="accent"
           formControlName="selectedProject"
           [suggestions]="filteredProjecs"
           [dropdown]="true"

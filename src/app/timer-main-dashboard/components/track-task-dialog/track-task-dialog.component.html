@@ -1,0 +1,77 @@
+<div class="track-task">
+  <form [formGroup]="formGroup">
+
+    <div class="task-autocomplete">
+      <p-autoComplete
+        class="accent"
+        formControlName="selectedProject"
+        [suggestions]="filteredProjecs"
+        [dropdown]="true"
+        [minLength]="1"
+        [showEmptyMessage]="true"
+        [autoHighlight]="true"
+        field="name"
+      ></p-autoComplete>
+    </div>
+
+    <div class="tags-and-duration">
+      <p-button
+        severity="accent"
+        icon="pi pi-tag"
+      ></p-button>
+
+      <span class="p-float-label">
+        <p-inputMask
+          id="startTimeInput"
+          class="accent"
+          mask="99:99"
+          formControlName="startTime"
+        ></p-inputMask>
+        <label for="startTimeInput">{{ 'timerMainDashboard.START-TIME' | translate }}</label>
+        <p-toggleButton
+          class="accent"
+          formControlName="lockStartTime"
+          [onIcon]="'pi pi-lock'"
+          offIcon="pi pi-lock-open"
+          (onChange)="lockOn($event, 'lockStartTime')"
+        ></p-toggleButton>
+      </span>
+
+      <span class="p-float-label">
+        <p-inputMask
+          id="endTimeInput"
+          class="accent"
+          mask="99:99"
+          formControlName="endTime"
+        ></p-inputMask>
+        <label for="endTimeInput">{{ 'timerMainDashboard.END-TIME' | translate }}</label>
+        <p-toggleButton
+          class="accent"
+          formControlName="lockEndTime"
+          [onIcon]="'pi pi-lock'"
+          offIcon="pi pi-lock-open"
+          (onChange)="lockOn($event, 'lockEndTime')"
+        ></p-toggleButton>
+      </span>
+
+      <span class="p-float-label">
+        <p-inputMask
+          #durationInput
+          id="duration"
+          class="accent"
+          mask="99:99"
+          formControlName="duration"
+          value="00:15"
+          (change)="updateDuration()"
+        ></p-inputMask>
+        <label for="duration">{{ 'timerMainDashboard.DURATION' | translate }}</label>
+        <p-toggleButton
+          class="accent"
+          formControlName="lockDuration"
+          [onIcon]="'pi pi-lock'"
+          offIcon="pi pi-lock-open"
+          (onChange)="lockOn($event, 'lockDuration')"
+        ></p-toggleButton>
+      </span>
+    </div>
+  </form>

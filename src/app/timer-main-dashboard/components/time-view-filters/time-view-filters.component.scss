@@ -23,50 +23,16 @@ section {
 
     form {
       max-height: var(--row-height);
-    }
-  }
-}
 
-::ng-deep
-{
-  p-autocomplete {
-    height: var(--row-height);
-    max-height: var(--row-height);
+      ::ng-deep {
+        p-autocomplete ul.p-autocomplete-items {
+          padding: 0;
 
-    input.p-autocomplete-input {
-      padding: 0 0.5rem;
-      height: var(--row-height);
-      border-radius: 0;
-    }
-
-    button.p-autocomplete-dropdown {
-      width: var(--row-height);
-      border: 0;
-      padding: 0;
-      color: #ffffff;
-      background: var(--accent-100);
-
-      &:hover {
-        background: var(--accent-200);
-      }
-
-      &:focus {
-        background: var(--accent-200);
-        box-shadow: 0 0 0 0.2rem #e2e8f0;
-      }
-
-      &:active {
-        background: var(--accent-600);
-        color: #ffffff;
-      }
-    }
-
-    ul.p-autocomplete-items {
-      padding: 0;
-
-      li.p-autocomplete-item {
-        padding: 0.25rem 0.5rem;
-        font-size: 14px;
+          li.p-autocomplete-item {
+            padding: 0.25rem 0.5rem;
+            font-size: 14px;
+          }
+        }
       }
     }
   }

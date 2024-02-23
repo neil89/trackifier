@@ -26,6 +26,8 @@
   --bg-200: #F5F5F5;
   --bg-100: #FFFFFF;
 
+  --components-height: 36px;
+
   --surface-0: #ffffff;
   --surface-50: #f9fafb;
   --surface-100: #f3f4f6;
@@ -453,6 +455,9 @@
     background: #ffffff;
     font-weight: 700;
   }
+  p-autocomplete input.p-autocomplete-input {
+    border-radius: 0;
+  }
   p-autocomplete.ng-dirty.ng-invalid > .p-autocomplete > .p-inputtext {
     border-color: #e24c4c;
   }
@@ -467,6 +472,37 @@
     color: #6b7280;
     right: 3.75rem;
   }
+
+  p-autocomplete.accent {
+    height: var(--components-height);
+  }
+  p-autocomplete.accent input.p-autocomplete-input {
+    padding: 0 0.5rem;
+    height: var(--components-height);
+  }
+  p-autocomplete.accent button.p-autocomplete-dropdown {
+    height: var(--components-height);
+    width: var(--components-height);
+    border: 0;
+    padding: 0;
+    color: #ffffff;
+    background: var(--accent-100);
+  }
+
+  p-autocomplete.accent button.p-autocomplete-dropdown:hover {
+    background: var(--accent-200);
+  }
+
+  p-autocomplete.accent button.p-autocomplete-dropdown:focus {
+    background: var(--accent-200);
+    box-shadow: 0 0 0 0.2rem #e2e8f0;
+  }
+
+  p-autocomplete.accent button.p-autocomplete-dropdown:active {
+    background: var(--accent-600);
+    color: #ffffff;
+  }
+
   p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
     border-color: #e24c4c;
   }
@@ -1218,6 +1254,24 @@
   .p-float-label > .ng-invalid.ng-dirty + label {
     color: #e24c4c;
   }
+
+  p-inputmask.accent .p-inputtext {
+    height: var(--components-height);
+    border-radius: 0;
+  }
+  p-inputmask.accent .p-inputtext:enabled:hover {
+    border-color: var(--accent-100);
+  }
+  p-inputmask.accent .p-inputtext:enabled:focus {
+    box-shadow: 0 0 0 0.2rem var(--accent-100);
+    border-color: var(--accent-200);
+  }
+  .p-float-label > p-inputmask.accent.p-inputwrapper-focus + label,
+  .p-float-label > p-inputmask.accent.p-inputwrapper-filled + label {
+    top: -0.45rem;
+    left: 0.1rem;
+  }
+
   .p-input-icon-left > .p-icon-wrapper.p-icon,
   .p-input-icon-left > i:first-of-type {
     left: 0.75rem;
@@ -1746,6 +1800,28 @@
   p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
     border-color: #e24c4c;
   }
+  /**/
+  p-togglebutton.accent .p-togglebutton.p-button {
+    background: #ffffff;
+    border: 1px solid var(--accent-100);
+    color: #4b5563;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    height: var(--components-height);
+    width: var(--components-height)
+  }
+  p-togglebutton.accent .p-togglebutton.p-button.p-highlight {
+    background: var(--accent-100);
+    border-color: var(--accent-100);
+    color: #ffffff;
+  }
+  p-togglebutton.accent .p-togglebutton.p-button.p-highlight:hover {
+    background: var(--accent-200);
+    border-color: var(--accent-200);
+    color: #ffffff;
+  }
+
+
+
   .p-treeselect {
     background: #ffffff;
     border: 1px solid #d1d5db;

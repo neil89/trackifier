@@ -4,6 +4,10 @@
   },
   "timerMainDashboard": {
     "TODAY": "Today",
-    "TOTAL-WEEK": "Total week"
+    "TOTAL-WEEK": "Total week",
+    "TRACK-TASK-TITLE": "Track task",
+    "START-TIME": "Start time",
+    "END-TIME": "End time",
+    "DURATION": "Duration"
   }
 }
