@@ -22,10 +22,12 @@
 
       <span class="p-float-label">
         <p-inputMask
+          #startTimeInput
           id="startTimeInput"
           class="accent"
           mask="99:99"
           formControlName="startTime"
+          (onComplete)="updateInputs(startTimeInput)"
         ></p-inputMask>
         <label for="startTimeInput">{{ 'timerMainDashboard.START-TIME' | translate }}</label>
         <p-toggleButton
@@ -39,10 +41,12 @@
 
       <span class="p-float-label">
         <p-inputMask
+          #endTimeInput
           id="endTimeInput"
           class="accent"
           mask="99:99"
           formControlName="endTime"
+          (onComplete)="updateInputs(endTimeInput)"
         ></p-inputMask>
         <label for="endTimeInput">{{ 'timerMainDashboard.END-TIME' | translate }}</label>
         <p-toggleButton
@@ -57,12 +61,12 @@
       <span class="p-float-label">
         <p-inputMask
           #durationInput
-          id="duration"
+          id="durationInput"
           class="accent"
           mask="99:99"
           formControlName="duration"
           value="00:15"
-          (change)="updateDuration()"
+          (onComplete)="updateInputs(durationInput)"
         ></p-inputMask>
         <label for="duration">{{ 'timerMainDashboard.DURATION' | translate }}</label>
         <p-toggleButton

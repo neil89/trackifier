@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { ToggleButtonChangeEvent, ToggleButtonModule } from 'primeng/togglebutton';
-import { InputMaskModule } from 'primeng/inputmask';
+import { InputMask, InputMaskModule } from 'primeng/inputmask';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { DateTime, Duration } from 'luxon';
 import { Time } from '@angular/common';
@@ -164,33 +164,82 @@ export class TrackTaskDialogComponent {
     return true;
   }
 
-  public updateDuration(): void {
+  public updateInputs(input: InputMask): void {
 
     if(this.updateDurationLuxon() &&
       this.updateStartTimeLuxon() &&
       this.updateEndTimeLuxon()
-      ) {
+    ) {
 
-      if(this.getLockEndTime()) {
-        this.startDateTimeLuxon = this.endDateTimeLuxon?.minus(this.durationLuxon) || null;
-        this.formGroup.patchValue({
-          startTime: this.startDateTimeLuxon?.toFormat('HH:mm') || ""
-        });
-      }
-      else {
-        this.endDateTimeLuxon = this.startDateTimeLuxon?.plus(this.durationLuxon) || null;
-        this.formGroup.patchValue({
-          endTime: this.endDateTimeLuxon?.toFormat('HH:mm') || ""
-        });
+      const inputId = input.el.nativeElement.id;
+
+      switch(inputId) {
+        case 'startTimeInput':
+
+          if(this.getLockEndTime()) {
+            this.updateDuration();
+          }
+          else {
+            this.updateEndTime();
+          }
+
+          break;
+
+        case 'endTimeInput':
+
+            if(this.getLockDuration()) {
+              this.updateStartTime();
+            }
+            else {
+              this.updateDuration();
+            }
+
+            break;
+
+        case 'durationInput':
+
+          if(this.getLockEndTime()) {
+            this.updateStartTime();
+          }
+          else {
+            this.updateEndTime();
+          }
+
+          break;
       }
     }
   }
 
-  /*
-    UNCHECK
-  */
+  private updateDuration(): void {
+    this.durationLuxon = this.endDateTimeLuxon!.diff(this.startDateTimeLuxon!, ["hours", "minutes"]);
+    this.formGroup.patchValue({
+      duration: `${
+          this.durationLuxon.hours.toString().padStart(2, '0')
+        }:${
+          this.durationLuxon.minutes.toString().padStart(2, '0')
+        }`
+    });
+  }
+
+  private updateStartTime(): void {
+    this.startDateTimeLuxon = this.endDateTimeLuxon?.minus(this.durationLuxon) || null;
+    this.formGroup.patchValue({
+      startTime: this.startDateTimeLuxon?.toFormat('HH:mm') || ""
+    });
+  }
+
+  private updateEndTime(): void {
+    this.endDateTimeLuxon = this.startDateTimeLuxon?.plus(this.durationLuxon) || null;
+    this.formGroup.patchValue({
+      endTime: this.endDateTimeLuxon?.toFormat('HH:mm') || ""
+    });
+  }
+
 
   public lockOn(ev: ToggleButtonChangeEvent, controlName: string): void {
+
+    const inputName = controlName.replace('lock', '').charAt(0).toLowerCase() + controlName.slice(5);
+    const isLocked = this.formGroup.get(controlName)?.value;
 
     this.formGroup.get('startTime')?.enable();
     this.formGroup.get('endTime')?.enable();
@@ -199,17 +248,10 @@ export class TrackTaskDialogComponent {
     this.formGroup.get('lockEndTime')?.setValue(false);
     this.formGroup.get('lockDuration')?.setValue(false);
 
-    if (controlName === 'lockStartTime') {
-      this.formGroup.get('startTime')?.disable();
-      this.formGroup.get('lockStartTime')?.setValue(true);
-    }
-    if (controlName === 'lockEndTime') {
-      this.formGroup.get('endTime')?.disable();
-      this.formGroup.get('lockEndTime')?.setValue(true);
-    }
-    if (controlName === 'lockDuration') {
-      this.formGroup.get('duration')?.disable();
-      this.formGroup.get('lockDuration')?.setValue(true);
+    // It's true because it was just clicked
+    if(isLocked) {
+      this.formGroup.get(inputName)?.disable();
+      this.formGroup.get(controlName)?.setValue(true);
     }
   }
 }
