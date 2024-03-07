@@ -1,8 +1,10 @@
 import { DatePipe, TitleCasePipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 import { TrackTaskDialogComponent } from '../track-task-dialog';
+import { TrackingBox } from '@app/models/timer-main-dashboard.model';
 
 
 @Component({
@@ -21,6 +23,8 @@ import { TrackTaskDialogComponent } from '../track-task-dialog';
 })
 export class TimerGridComponent implements OnInit {
 
+  @ViewChildren('divisionSlot') divisionSlot!: QueryList<ElementRef>;
+
   @Input({required: true}) public selectedDate!: Date;
   locale: string = 'en';
 
@@ -29,6 +33,7 @@ export class TimerGridComponent implements OnInit {
 
 
   constructor(
+    private renderer: Renderer2,
     public dialogService: DialogService,
     private translate: TranslateService
   ) {
@@ -41,6 +46,17 @@ export class TimerGridComponent implements OnInit {
       return `${hour.toString().padStart(2, '0')}:00`;
     });
   }
+
+  // ngAfterViewInit(): void {
+  //   debugger;
+  //   this.divisionSlot.changes.subscribe((divisionSlot: QueryList<ElementRef>) => {
+  //     if(divisionSlot.length > 0) {
+  //       divisionSlot.forEach((slot: ElementRef) => {
+  //         this.renderer.listen(slot.nativeElement, 'click', (ev: MouseEvent) => this.show(ev));
+  //       });
+  //     }
+  //   });
+  // }
 
   public show(ev: MouseEvent): void {
     const selectedHour: string | null = (ev.target as HTMLElement)?.getAttribute('data-hour');
@@ -57,6 +73,53 @@ export class TimerGridComponent implements OnInit {
         width: '90%',
         modal: true
       }
-    )
+    );
+
+    this.dialogRef.onClose.subscribe((data: TrackingBox) => {
+      console.log('Data: ', data);
+      if(data) {
+        this.addTrackingBox(data);
+      }
+    });
+
+  }
+
+  public addTrackingBox(tracking: TrackingBox): void {
+
+    const startHourSearch = tracking.startTime.hours.toString().padStart(2, '0') + ':00';
+    const startMinute = (15 * Math.floor(tracking.startTime.minutes / 15)).toString();
+    const endHour = tracking.endTime.hours.toString().padStart(2, '0') + ':00';
+    const endMinute = (15 * Math.floor(tracking.endTime.minutes / 15)).toString();
+
+    const startSlot = this.divisionSlot.find( x =>
+      x.nativeElement.dataset.hour == startHourSearch &&
+      x.nativeElement.dataset.division == startMinute
+    );
+
+    const endSlot = this.divisionSlot.find( x =>
+      x.nativeElement.dataset.hour == endHour &&
+      x.nativeElement.dataset.division == endMinute
+    );
+
+    const startQuarterOffset = (tracking.startTime.minutes % 15) * startSlot?.nativeElement.offsetHeight / 15;
+    const endQuarterOffset = (tracking.endTime.minutes % 15) * endSlot?.nativeElement.offsetHeight / 15;
+
+    const top = startSlot?.nativeElement.offsetTop + startQuarterOffset;
+    const left = startSlot?.nativeElement.offsetLeft;
+    const height = (endSlot?.nativeElement.offsetTop - startSlot?.nativeElement.offsetTop)
+      - startQuarterOffset + endQuarterOffset;
+    const width = endSlot?.nativeElement.offsetWidth;
+
+    const trackingBox = this.renderer.createElement('div');
+    this.renderer.setStyle(trackingBox, 'position', 'absolute');
+    this.renderer.setStyle(trackingBox, 'top', top + 'px');
+    this.renderer.setStyle(trackingBox, 'left', left + 'px');
+    this.renderer.setStyle(trackingBox, 'width', width + 'px');
+    this.renderer.setStyle(trackingBox, 'height', height + 'px');
+    this.renderer.setStyle(trackingBox, 'background-color', 'rgba(248, 170, 31, 0.6)');
+    this.renderer.setStyle(trackingBox, 'border', '1px solid #f8aa1f');
+    this.renderer.appendChild(document.body, trackingBox);
+
+    // console.log(`y: ${trackingBoxY}, x: ${trackingBoxX} | width: ${trackingBoxWidth}`);
   }
 }

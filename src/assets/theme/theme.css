@@ -14,9 +14,12 @@
 
   --text-100: #1A1A1A;
   --text-200: #404040;
-  --primary-100: #DE283B;
-  --primary-200: #FF6366;
-  --primary-300: #FFCCC4;
+  --primary-100: #FFCCC4;
+  --primary-300: #FF6366;
+  --primary-400: #DE283B;
+  --primary-600: #600F17;
+  --primary-700: #500D13;
+  --primary-900: #200508;
   --accent-100: #25B1BF;
   --accent-200: #1F96A2;
   --accent-600: #007082;
@@ -1800,7 +1803,7 @@
   p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
     border-color: #e24c4c;
   }
-  /**/
+
   p-togglebutton.accent .p-togglebutton.p-button {
     background: #ffffff;
     border: 1px solid var(--accent-100);
@@ -1944,21 +1947,21 @@
   }
   .p-button {
     color: #ffffff;
-    background: #14b8a6;
-    border: 1px solid #14b8a6;
+    background: var(--primary-400);
+    border: 1px solid var(--primary-400);
     padding: 0.85rem 1.25rem;
     font-size: 1rem;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
   .p-button:not(:disabled):hover {
-    background: #0d9488;
+    background: var(--primary-600);
     color: #ffffff;
-    border-color: #0d9488;
+    border-color: var(--primary-600);
   }
   .p-button:not(:disabled):active {
-    background: #0f766e;
+    background: var(--primary-600);
     color: #ffffff;
-    border-color: #0f766e;
+    border-color: var(--primary-600);
   }
   .p-button.p-button-outlined {
     background-color: transparent;
@@ -6242,7 +6245,7 @@
     background-color: #14b8a6;
   }
   .p-button:focus {
-    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #75f0e3, 0 1px 2px 0 rgb(0, 0, 0);
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--primary-600), 0 1px 2px 0 rgb(0, 0, 0);
   }
   .p-button.p-button-secondary:enabled:focus {
     box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #b0b9c6, 0 1px 2px 0 rgb(0, 0, 0);

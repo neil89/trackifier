@@ -11,17 +11,24 @@
   form {
     width: 100%;
 
-    .tags-and-duration {
+    .tags-and-duration, .footer-buttons {
       display: flex;
       flex-flow: row nowrap;
-      justify-content: space-between;
       align-items: center;
       padding-top: 1.5rem;
     }
 
+    .tags-and-duration {
+      justify-content: space-between;
+    }
+
+    .footer-buttons {
+      justify-content: center;
+    }
+
     ::ng-deep {
 
-      p-button button {
+      p-button.only-icon button {
         width: var(--row-height);
         height: var(--row-height);
       }

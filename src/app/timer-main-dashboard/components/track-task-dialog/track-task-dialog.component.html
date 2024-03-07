@@ -16,6 +16,7 @@
 
     <div class="tags-and-duration">
       <p-button
+        class="only-icon"
         severity="accent"
         icon="pi pi-tag"
       ></p-button>
@@ -77,5 +78,13 @@
           (onChange)="lockOn($event, 'lockDuration')"
         ></p-toggleButton>
       </span>
+    </div>
+
+    <div class="footer-buttons">
+      <p-button
+        icon="pi pi-stopwatch"
+        [label]="translate.instant('timerMainDashboard.TRACK')"
+        (click)="register()"
+      ></p-button>
     </div>
   </form>

@@ -8,6 +8,7 @@
     "TRACK-TASK-TITLE": "Track task",
     "START-TIME": "Start time",
     "END-TIME": "End time",
-    "DURATION": "Duration"
+    "DURATION": "Duration",
+    "TRACK": "Track"
   }
 }

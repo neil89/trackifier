@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { ToggleButtonChangeEvent, ToggleButtonModule } from 'primeng/togglebutton';
 import { InputMask, InputMaskModule } from 'primeng/inputmask';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DateTime, Duration } from 'luxon';
 import { Time } from '@angular/common';
 
-
 import { Project } from '@app/models/project.model';
-
+import { TrackingBox } from '@app/models/timer-main-dashboard.model';
 
 @Component({
   selector: 'app-track-task-dialog',
@@ -43,6 +42,8 @@ export class TrackTaskDialogComponent {
 
   constructor(
     private dialogConfig: DynamicDialogConfig,
+    private dialogRef: DynamicDialogRef,
+    public translate: TranslateService
   ) {
 
     this.durationLuxon = Duration.fromObject({minutes: 15});
@@ -77,28 +78,28 @@ export class TrackTaskDialogComponent {
     });
   }
 
-  public getStartTime(): string {
+  public get startTime(): string {
     return this.formGroup.get('startTime')?.value || "";
   }
-  public getLockStartTime(): boolean {
+  public get lockStartTime(): boolean {
     return this.formGroup.get('lockStartTime')?.value || false;
   }
-  public getEndTime(): string {
+  public get endTime(): string {
     return this.formGroup.get('endTime')?.value || "";
   }
-  public getLockEndTime(): boolean {
+  public get lockEndTime(): boolean {
     return this.formGroup.get('lockEndTime')?.value || false;
   }
-  public getDuration(): string {
+  public get duration(): string {
     return this.formGroup.get('duration')?.value || "";
   }
-  public getLockDuration(): boolean {
+  public get lockDuration(): boolean {
     return this.formGroup.get('lockDuration')?.value || false;
   }
 
   private updateStartTimeLuxon(): boolean {
-    if(!this.getStartTime()) {
-      if(this.getEndTime() && this.getDuration()) {
+    if(!this.startTime) {
+      if(this.endTime && this.duration) {
         this.updateEndTimeLuxon();
         this.updateDurationLuxon();
         this.formGroup.patchValue({
@@ -110,15 +111,15 @@ export class TrackTaskDialogComponent {
       }
     }
     this.startDateTimeLuxon = DateTime.fromObject({
-      hour: +this.getStartTime().split(':')[0],
-      minute: +this.getStartTime().split(':')[1]
+      hour: +this.startTime.split(':')[0],
+      minute: +this.startTime.split(':')[1]
     });
 
     return true;
   }
   private updateEndTimeLuxon(): boolean {
-    if(!this.getEndTime()) {
-      if(this.getStartTime() && this.getDuration()) {
+    if(!this.endTime) {
+      if(this.startTime && this.duration) {
         this.updateStartTimeLuxon();
         this.updateDurationLuxon();
         this.formGroup.patchValue({
@@ -131,15 +132,15 @@ export class TrackTaskDialogComponent {
     }
 
     this.endDateTimeLuxon = DateTime.fromObject({
-      hour: +this.getEndTime().split(':')[0],
-      minute: +this.getEndTime().split(':')[1]
+      hour: +this.endTime.split(':')[0],
+      minute: +this.endTime.split(':')[1]
     });
 
     return true;
   }
   private updateDurationLuxon(): boolean {
-    if(!this.getDuration()) {
-      if(this.getStartTime() && this.getEndTime()) {
+    if(!this.duration) {
+      if(this.startTime && this.endTime) {
         this.updateStartTimeLuxon();
         this.updateEndTimeLuxon();
 
@@ -157,8 +158,8 @@ export class TrackTaskDialogComponent {
       }
     }
     this.durationLuxon = Duration.fromObject({
-      hours: +this.getDuration().split(':')[0],
-      minutes: +this.getDuration().split(':')[1]
+      hours: +this.duration.split(':')[0],
+      minutes: +this.duration.split(':')[1]
     });
 
     return true;
@@ -176,7 +177,7 @@ export class TrackTaskDialogComponent {
       switch(inputId) {
         case 'startTimeInput':
 
-          if(this.getLockEndTime()) {
+          if(this.lockEndTime) {
             this.updateDuration();
           }
           else {
@@ -187,7 +188,7 @@ export class TrackTaskDialogComponent {
 
         case 'endTimeInput':
 
-            if(this.getLockDuration()) {
+            if(this.lockDuration) {
               this.updateStartTime();
             }
             else {
@@ -198,7 +199,7 @@ export class TrackTaskDialogComponent {
 
         case 'durationInput':
 
-          if(this.getLockEndTime()) {
+          if(this.lockEndTime) {
             this.updateStartTime();
           }
           else {
@@ -253,5 +254,31 @@ export class TrackTaskDialogComponent {
       this.formGroup.get(inputName)?.disable();
       this.formGroup.get(controlName)?.setValue(true);
     }
+  }
+
+  public register(): void {
+
+    this.updateStartTimeLuxon();
+    this.updateEndTimeLuxon();
+    this.updateDurationLuxon();
+
+      const trackingBox = {
+        project: this.formGroup.get('selectedProject')?.value,
+        startTime: {
+          hours: this.startDateTimeLuxon?.hour,
+          minutes: this.startDateTimeLuxon?.minute
+        } as Time,
+        endTime: {
+          hours: this.endDateTimeLuxon?.hour,
+          minutes: this.endDateTimeLuxon?.minute
+        } as Time,
+        duration: {
+          hours: this.durationLuxon.hours,
+          minutes: this.durationLuxon.minutes
+        } as Time,
+        tags: []
+      };
+
+      this.dialogRef.close(trackingBox as TrackingBox);
   }
 }

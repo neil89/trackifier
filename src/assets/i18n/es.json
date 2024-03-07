@@ -8,7 +8,8 @@
     "TRACK-TASK-TITLE": "Registrar tarea",
     "START-TIME": "Hora inicio",
     "END-TIME": "Hora fin",
-    "DURATION": "Duración"
+    "DURATION": "Duración",
+    "TRACK": "Registrar"
   },
   "primeNg": {
     "startsWith": "Comience con",
