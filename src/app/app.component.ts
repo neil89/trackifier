@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 
 import { SidePanelComponent } from './side-panel/side-panel.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -15,6 +17,7 @@ import { HeaderBarComponent } from './header-bar/header-bar.component';
     styleUrls: ['./app.component.scss'],
     standalone: true,
     imports: [
+      CommonModule,
       HeaderBarComponent,
       SidePanelComponent,
       RouterOutlet,

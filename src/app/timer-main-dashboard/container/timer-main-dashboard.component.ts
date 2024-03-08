@@ -8,12 +8,18 @@ import {
 } from '../components';
 import * as TimerMainDashboardActions from '../store/index';
 import { TimerMainDashboardState } from '@models/timer-main-dashboard.model';
+import { ProjectService } from '@app/services/projects.service';
+import { Observable } from 'rxjs';
+import { Project } from '@app/models/project.model';
+import { CommonModule } from '@angular/common';
+import { getAllProjects } from '../../projects/store/actions/project.actions';
 
 
 @Component({
   selector: 'app-timer-main-dashboard',
   standalone: true,
   imports: [
+    CommonModule,
     TimeViewFiltersComponent,
     RangeTimeSelectorComponent,
     TimerGridComponent
@@ -28,14 +34,28 @@ export class TimerMainDashboardComponent {
     currentDate: this.currentDate,
     selectedDate: this.currentDate
   };
+  projects$: Observable<Project[]> = this.projectsService.getProjects();
 
   constructor(
-    private store: Store
+    private store: Store,
+    private projectsService: ProjectService
   ) {
     this.updateDatesOnStore(this.updateDates);
   }
 
   ngOnInit() {
+    // this.projects$
+    //   .pipe(
+    //     distinctUntilChanged()
+    //   )
+    //   .subscribe((projects: Project[]) => {
+    //     console.log(projects);
+    //     // this.store.dispatch( TimerMainDashboardActions.setProjects({
+    //     //   projects: projects
+    //     // }));
+    //   }
+    // );
+    this.store.dispatch(getAllProjects());
   }
 
   public updateDatesOnStore(ev: TimerMainDashboardState) {

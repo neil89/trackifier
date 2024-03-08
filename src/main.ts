@@ -18,30 +18,40 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app/app-routing.module';
 import { timerMainDashboardReducer } from '@app/timer-main-dashboard/store/reducers/timer-main-dashboard.reducer';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { ProjectEffects } from '@app/projects/store/effects/project.effects';
 
 const ngrxModules = [
   StoreModule.forRoot({
     timerMainDashboard: timerMainDashboardReducer
   }),
-  EffectsModule.forRoot([]),
+  EffectsModule.forRoot([
+    ProjectEffects
+  ]),
   StoreDevtoolsModule.instrument({
     name: 'Trackifier',
     maxAge: 50
   })
 ];
 
+const firebaseConfig = {
+  "apiKey": "AIzaSyBW4-TBUDUqreS52SmVh_h9y7xVf_LRUHk",
+  "authDomain": "trackifier.firebaseapp.com",
+  "databaseURL": "https://trackifier.firebaseio.com",
+  "projectId": "trackifier",
+  "storageBucket": "trackifier.appspot.com",
+  "messagingSenderId": "231128310965",
+  "appId": "1:231128310965:web:e65a10ed747030bd4b4afc",
+}
+
 const firebaseModules = [
-  provideFirebaseApp(() => initializeApp({
-    "projectId": "trackifier",
-    "appId": "1:231128310965:web:e65a10ed747030bd4b4afc",
-    "storageBucket": "trackifier.appspot.com",
-    "apiKey": "AIzaSyBW4-TBUDUqreS52SmVh_h9y7xVf_LRUHk",
-    "authDomain": "trackifier.firebaseapp.com",
-    "messagingSenderId": "231128310965"
-  })),
+  provideFirebaseApp(() => initializeApp(firebaseConfig)),
   provideAuth(() => getAuth()),
   provideFirestore(() => getFirestore()),
-  provideFunctions(() => getFunctions())
+  provideFunctions(() => getFunctions()),
+  AngularFireModule.initializeApp(firebaseConfig),
+  AngularFirestoreModule
 ];
 
 export function HttpLoaderFactory(http: HttpClient) {

@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, JsonPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DateTime } from 'luxon';
@@ -22,7 +22,8 @@ interface AutoCompleteCompleteEvent {
     ReactiveFormsModule,
     DatePipe,
     DurationPipe,
-    TranslateModule
+    TranslateModule,
+    JsonPipe
   ],
   templateUrl: './time-view-filters.component.html',
   styleUrl: './time-view-filters.component.scss'
@@ -33,9 +34,10 @@ export class TimeViewFiltersComponent implements OnInit {
   currentDateLx: DateTime | null = null;
   totalTimeWeek: number = 0;
 
-  public formGroup!: FormGroup;
-  projects: Project[] = [];
+  @Input() public projects: Project[] | null = [];
   filteredProjecs: Project[] = [];
+
+  public formGroup!: FormGroup;
 
   ngOnInit() {
     this.currentDateLx = DateTime.fromJSDate(this.currentDate);
@@ -45,34 +47,40 @@ export class TimeViewFiltersComponent implements OnInit {
     });
 
     // 3 sample projects to test
-    this.projects = [
-      {
-        id: '1',
-        name: 'Project 1',
-        description: 'Sample project 1',
-      },
-      {
-        id: '2',
-        name: 'Project 2',
-        description: 'Sample project 2',
-      },
-      {
-        id: '3',
-        name: 'Project 3',
-        description: 'Sample project 3',
-      }
-    ];
+    // this.projects = [
+    //   {
+    //     id: '1',
+    //     name: 'Project 1',
+    //     description: 'Sample project 1',
+    //   },
+    //   {
+    //     id: '2',
+    //     name: 'Project 2',
+    //     description: 'Sample project 2',
+    //   },
+    //   {
+    //     id: '3',
+    //     name: 'Project 3',
+    //     description: 'Sample project 3',
+    //   }
+    //];
+
+
   }
 
   projectSelected(ev: any) {
     console.log(ev);
 
-    let filtered: any[] = [];
+    if(!this.projects) {
+      return;
+    }
+
+    let filtered: Project[] = [];
     let query = ev.query;
-    for (let i = 0; i < (this.projects as any[]).length; i++) {
-        let country = (this.projects as any[])[i];
-        if (country.name.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
-            filtered.push(country);
+    for (let i = 0; i < this.projects.length; i++) {
+        let project = this.projects[i];
+        if (project.name.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
+            filtered.push(project);
         }
     }
     this.filteredProjecs = filtered;
