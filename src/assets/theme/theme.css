@@ -6247,6 +6247,9 @@
   .p-button:focus {
     box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--primary-600), 0 1px 2px 0 rgb(0, 0, 0);
   }
+  .accent .p-button:focus {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--accent-200), 0 1px 2px 0 rgb(0, 0, 0);
+  }
   .p-button.p-button-secondary:enabled:focus {
     box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #b0b9c6, 0 1px 2px 0 rgb(0, 0, 0);
   }

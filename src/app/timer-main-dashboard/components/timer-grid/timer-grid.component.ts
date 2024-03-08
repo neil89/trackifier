@@ -75,21 +75,23 @@ export class TimerGridComponent implements OnInit {
       }
     );
 
-    this.dialogRef.onClose.subscribe((data: TrackingBox) => {
-      console.log('Data: ', data);
-      if(data) {
-        this.addTrackingBox(data);
+    this.dialogRef.onClose.subscribe((trackingBoxData: TrackingBox) => {
+      console.log('Data: ', trackingBoxData);
+      if(trackingBoxData && this.divisionSlot.length > 0) {
+        const divisionStep = this.divisionSlot.get(1)?.nativeElement.dataset.division -
+          this.divisionSlot.get(0)?.nativeElement.dataset.division;
+        this.addTrackingBox(trackingBoxData, divisionStep);
       }
     });
 
   }
 
-  public addTrackingBox(tracking: TrackingBox): void {
+  public addTrackingBox(tracking: TrackingBox, divisionStep: number): void {
 
     const startHourSearch = tracking.startTime.hours.toString().padStart(2, '0') + ':00';
-    const startMinute = (15 * Math.floor(tracking.startTime.minutes / 15)).toString();
+    const startMinute = (divisionStep * Math.floor(tracking.startTime.minutes / divisionStep)).toString();
     const endHour = tracking.endTime.hours.toString().padStart(2, '0') + ':00';
-    const endMinute = (15 * Math.floor(tracking.endTime.minutes / 15)).toString();
+    const endMinute = (divisionStep * Math.floor(tracking.endTime.minutes / divisionStep)).toString();
 
     const startSlot = this.divisionSlot.find( x =>
       x.nativeElement.dataset.hour == startHourSearch &&
@@ -101,8 +103,8 @@ export class TimerGridComponent implements OnInit {
       x.nativeElement.dataset.division == endMinute
     );
 
-    const startQuarterOffset = (tracking.startTime.minutes % 15) * startSlot?.nativeElement.offsetHeight / 15;
-    const endQuarterOffset = (tracking.endTime.minutes % 15) * endSlot?.nativeElement.offsetHeight / 15;
+    const startQuarterOffset = (tracking.startTime.minutes % divisionStep) * startSlot?.nativeElement.offsetHeight / divisionStep;
+    const endQuarterOffset = (tracking.endTime.minutes % divisionStep) * endSlot?.nativeElement.offsetHeight / divisionStep;
 
     const top = startSlot?.nativeElement.offsetTop + startQuarterOffset;
     const left = startSlot?.nativeElement.offsetLeft;

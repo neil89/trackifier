@@ -1,7 +1,7 @@
 .track-task {
 
   --row-height: 36px;
-  --input-mask-width: 80px;
+  --input-mask-width: 60px;
 
   display: flex;
   flex-flow: column;
@@ -11,15 +11,25 @@
   form {
     width: 100%;
 
-    .tags-and-duration, .footer-buttons {
+    & > div {
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
       padding-top: 1.5rem;
     }
 
-    .tags-and-duration {
+    .task-autocomplete, .tags {
+      padding-top: 0.5rem;
+      justify-content: stretch;
+    }
+
+    .duration {
       justify-content: space-between;
+
+      & > span {
+        display: flex;
+        flex-flow: row nowrap;
+      }
     }
 
     .footer-buttons {
