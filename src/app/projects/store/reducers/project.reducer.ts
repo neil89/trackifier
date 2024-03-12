@@ -6,16 +6,15 @@ import {
   getProjectByName
 } from "../actions/project.actions";
 import { state } from "@angular/animations";
+import { ProjectsState } from "@app/models/timer-main-dashboard.model";
 
 
 
 
-const initialProjectState: Project = {
-  id: '',
-  name: '',
-  description: '',
+const initialProjectsState: ProjectsState = {
+  projects: []
 };
 
-export const projectReducer = createReducer<Project>(
-  initialProjectState,
+export const projectReducer = createReducer<ProjectsState>(
+  initialProjectsState,
 )

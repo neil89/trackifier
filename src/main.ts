@@ -21,10 +21,12 @@ import { timerMainDashboardReducer } from '@app/timer-main-dashboard/store/reduc
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ProjectEffects } from '@app/projects/store/effects/project.effects';
+import { projectReducer } from '@app/projects/store/reducers/project.reducer';
 
 const ngrxModules = [
   StoreModule.forRoot({
-    timerMainDashboard: timerMainDashboardReducer
+    timerMainDashboard: timerMainDashboardReducer,
+    project: projectReducer
   }),
   EffectsModule.forRoot([
     ProjectEffects

@@ -15,3 +15,7 @@ export interface TrackingBox {
   duration: Time;
   tags: string[];
 }
+
+export interface ProjectsState {
+  projects: Project[];
+}

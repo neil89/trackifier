@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
+import { TimerMainDashboardState } from '@models/timer-main-dashboard.model';
+import { ProjectService } from '@app/services/projects.service';
+import { Project } from '@app/models/project.model';
 import {
   TimeViewFiltersComponent,
   RangeTimeSelectorComponent,
   TimerGridComponent,
 } from '../components';
 import * as TimerMainDashboardActions from '../store/index';
-import { TimerMainDashboardState } from '@models/timer-main-dashboard.model';
-import { ProjectService } from '@app/services/projects.service';
-import { Observable } from 'rxjs';
-import { Project } from '@app/models/project.model';
-import { CommonModule } from '@angular/common';
-import { getAllProjects } from '../../projects/store/actions/project.actions';
+import { selectAllProjects } from '@app/projects/store/selectors';
+import { getAllProjects } from '@app/projects/store';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class TimerMainDashboardComponent {
     currentDate: this.currentDate,
     selectedDate: this.currentDate
   };
-  projects$: Observable<Project[]> = this.projectsService.getProjects();
+  projects$: Observable<any> | null = null;
 
   constructor(
     private store: Store,
@@ -56,6 +57,12 @@ export class TimerMainDashboardComponent {
     //   }
     // );
     this.store.dispatch(getAllProjects());
+    this.projects$ = this.store.select(selectAllProjects);
+
+this.projects$.subscribe((projects: any) => {
+  console.log("Suscription");
+  console.log(projects);
+});
   }
 
   public updateDatesOnStore(ev: TimerMainDashboardState) {

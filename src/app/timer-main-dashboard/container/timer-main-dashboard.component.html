@@ -1,4 +1,9 @@
 <main>
+  <div>
+    <p>
+      {{ projects$ | async | json }}
+    </p>
+  </div>
   <app-time-view-filters
     [projects]="projects$ | async"
     [currentDate]="currentDate"
