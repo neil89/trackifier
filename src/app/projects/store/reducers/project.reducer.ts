@@ -1,11 +1,10 @@
 import { createReducer, on } from "@ngrx/store";
-import { Project } from "@app/models/project.model";
 
 import {
   getAllProjects,
+  getAllProjectsSuccess,
   getProjectByName
 } from "../actions/project.actions";
-import { state } from "@angular/animations";
 import { ProjectsState } from "@app/models/timer-main-dashboard.model";
 
 
@@ -17,4 +16,10 @@ const initialProjectsState: ProjectsState = {
 
 export const projectReducer = createReducer<ProjectsState>(
   initialProjectsState,
+  on(getAllProjectsSuccess, (state) => {
+    return {
+      ...state,
+      projects: state.projects
+    }
+  }),
 )

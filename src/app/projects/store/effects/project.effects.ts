@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ProjectService } from "@services/projects.service";
-import { getAllProjects } from "../actions";
-import { mergeMap, tap } from "rxjs";
+import { getAllProjects, getAllProjectsSuccess } from "../actions";
+import { map, mergeMap, tap } from "rxjs";
 
 
 @Injectable()
@@ -17,11 +17,15 @@ export class ProjectEffects {
     return this.actions$
       .pipe(
         ofType(getAllProjects),
-        mergeMap(() => this.projectService.getProjects()),
-        tap((projects) => console.log(projects))
+        mergeMap(() => this.projectService.getProjects()
+          .pipe(
+            map((projects) => {
+              console.log("Received projects");
+              return getAllProjectsSuccess({ projects: { projects }}) })
+            )
+        ),
+        tap((projects) => console.log(projects))        
       );
-    },
-    { dispatch: false }
+    }
   );
-
 }
