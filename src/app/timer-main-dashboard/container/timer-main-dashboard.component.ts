@@ -45,24 +45,8 @@ export class TimerMainDashboardComponent {
   }
 
   ngOnInit() {
-    // this.projects$
-    //   .pipe(
-    //     distinctUntilChanged()
-    //   )
-    //   .subscribe((projects: Project[]) => {
-    //     console.log(projects);
-    //     // this.store.dispatch( TimerMainDashboardActions.setProjects({
-    //     //   projects: projects
-    //     // }));
-    //   }
-    // );
     this.store.dispatch(getAllProjects());
     this.projects$ = this.store.select(selectAllProjects);
-
-this.projects$.subscribe((projects: any) => {
-  console.log("Suscription");
-  console.log(projects);
-});
   }
 
   public updateDatesOnStore(ev: TimerMainDashboardState) {

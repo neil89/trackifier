@@ -46,6 +46,8 @@ export class TrackTaskDialogComponent {
     public translate: TranslateService
   ) {
 
+    this.projects = dialogConfig.data.projects;
+
     this.durationLuxon = Duration.fromObject({minutes: 15});
 
     this.startDateTimeLuxon = DateTime.fromObject({
@@ -254,6 +256,24 @@ export class TrackTaskDialogComponent {
       this.formGroup.get(inputName)?.disable();
       this.formGroup.get(controlName)?.setValue(true);
     }
+  }
+
+  projectSelected(ev: any) {
+    console.log(ev);
+
+    if(!this.projects) {
+      return;
+    }
+
+    let filtered: Project[] = [];
+    let query = ev.query;
+    for (let i = 0; i < this.projects.length; i++) {
+        let project = this.projects[i];
+        if (project.name.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
+            filtered.push(project);
+        }
+    }
+    this.filteredProjecs = filtered;
   }
 
   public register(): void {

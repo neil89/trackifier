@@ -2,7 +2,9 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ProjectService } from "@services/projects.service";
 import { getAllProjects, getAllProjectsSuccess } from "../actions";
-import { map, mergeMap, tap } from "rxjs";
+import { map, switchMap, tap } from "rxjs";
+import { Project } from "@app/models/project.model";
+import { ProjectsState } from "@app/models/timer-main-dashboard.model";
 
 
 @Injectable()
@@ -17,14 +19,14 @@ export class ProjectEffects {
     return this.actions$
       .pipe(
         ofType(getAllProjects),
-        mergeMap(() => this.projectService.getProjects()
+        switchMap(() => this.projectService.getProjects()
           .pipe(
-            map((projects) => {
-              console.log("Received projects");
-              return getAllProjectsSuccess({ projects: { projects }}) })
-            )
+            map((projects: Project[]) => {
+              const clonedProjects = JSON.parse(JSON.stringify(projects)) as Project[];
+              return getAllProjectsSuccess({ projects: clonedProjects });
+            })
+          )
         ),
-        tap((projects) => console.log(projects))        
       );
     }
   );

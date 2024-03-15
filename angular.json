@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "trackifier:build:production"
+              "buildTarget": "trackifier:build:production"
             },
             "development": {
-              "browserTarget": "trackifier:build:development"
+              "buildTarget": "trackifier:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "trackifier:build"
+            "buildTarget": "trackifier:build"
           }
         },
         "test": {

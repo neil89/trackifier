@@ -1,3 +1,4 @@
+import { Project } from "@app/models/project.model";
 import { ProjectsState } from "@app/models/timer-main-dashboard.model";
 import { createAction, props } from "@ngrx/store";
 
@@ -17,7 +18,7 @@ export const getAllProjects = createAction(
 
 export const getAllProjectsSuccess = createAction(
   ProjectActionTypes.GET_ALL_PROJECTS_SUCCESS,
-  props<{ projects: ProjectsState }>()
+  props<{ projects: Project[] }>()
 );
 
 export const getProjectByName = createAction(

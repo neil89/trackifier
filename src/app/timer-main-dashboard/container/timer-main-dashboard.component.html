@@ -1,15 +1,13 @@
 <main>
-  <div>
-    <p>
-      {{ projects$ | async | json }}
-    </p>
-  </div>
   <app-time-view-filters
     [projects]="projects$ | async"
     [currentDate]="currentDate"
   />
   <app-range-time-selector (updateDates)="updateDatesOnStore($event)"/>
   <section>
-    <app-timer-grid [selectedDate]="updateDates.selectedDate"/>
+    <app-timer-grid
+      [projects]="projects$ | async"
+      [selectedDate]="updateDates.selectedDate"
+    />
   </section>
 </main>

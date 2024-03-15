@@ -5,6 +5,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { TrackTaskDialogComponent } from '../track-task-dialog';
 import { TrackingBox } from '@app/models/timer-main-dashboard.model';
+import { Project } from '@app/models/project.model';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class TimerGridComponent implements OnInit {
 
   @Input({required: true}) public selectedDate!: Date;
   locale: string = 'en';
+
+  @Input() public projects: Project[] | null = [];
 
   scheduleTime = new Array<string>(15);
   dialogRef: DynamicDialogRef | undefined;
@@ -67,7 +70,8 @@ export class TimerGridComponent implements OnInit {
         data: {
           selectedDate: this.selectedDate,
           selectedHour,
-          selectedDivision
+          selectedDivision,
+          projects: this.projects
         },
         header: this.translate.instant('timerMainDashboard.TRACK-TASK-TITLE'),
         width: '90%',

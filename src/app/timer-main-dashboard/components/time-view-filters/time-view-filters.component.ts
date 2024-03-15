@@ -45,27 +45,6 @@ export class TimeViewFiltersComponent implements OnInit {
     this.formGroup = new FormGroup({
       selectedProject: new FormControl<Project | null>(null)
     });
-
-    // 3 sample projects to test
-    // this.projects = [
-    //   {
-    //     id: '1',
-    //     name: 'Project 1',
-    //     description: 'Sample project 1',
-    //   },
-    //   {
-    //     id: '2',
-    //     name: 'Project 2',
-    //     description: 'Sample project 2',
-    //   },
-    //   {
-    //     id: '3',
-    //     name: 'Project 3',
-    //     description: 'Sample project 3',
-    //   }
-    //];
-
-
   }
 
   projectSelected(ev: any) {
