@@ -4,7 +4,7 @@ import { DateTime } from 'luxon';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 
-import { TimerMainDashboardState } from '@models/timer-main-dashboard.model';
+import { TimerMainDashboardState } from '@app/shared/models/timer-main-dashboard.model';
 
 
 @Component({

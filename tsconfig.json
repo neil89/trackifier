@@ -28,8 +28,8 @@
       "@env/*": ["src/environments/*"],
       "@components/*": ["src/app/components/*"],
       "@containers/*": ["src/app/containers/*"],
-      "@models/*": ["src/app/models/*"],
-      "@pipes/*": ["src/app/pipes/*"],
+      "@models/*": ["src/app/shared/models/*"],
+      "@pipes/*": ["src/app/shared/pipes/*"],
       "@services/*": ["src/app/services/*"],
     }
   },

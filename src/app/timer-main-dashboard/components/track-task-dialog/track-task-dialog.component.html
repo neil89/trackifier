@@ -2,7 +2,7 @@
   <form [formGroup]="formGroup">
 
     <div class="task-autocomplete">
-      <p-autoComplete
+      <!-- <p-autoComplete
         class="accent"
         formControlName="selectedProject"
         [suggestions]="filteredProjecs"
@@ -12,7 +12,11 @@
         [autoHighlight]="true"
         field="name"
         (completeMethod)="projectSelected($event)"
-      ></p-autoComplete>
+      ></p-autoComplete> -->
+      <app-projects-dropdown
+        [projects]="projects"
+        (selectedProject)="projectSelected($event)"
+      />
     </div>
 
     <div class="tags">
@@ -91,3 +95,7 @@
       ></p-button>
     </div>
   </form>
+
+  <p>
+    {{ formGroup.value | json}}
+  </p>

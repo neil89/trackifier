@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 
-import { TimerMainDashboardState } from "src/app/models/timer-main-dashboard.model";
+import { TimerMainDashboardState } from "@app/shared/models/timer-main-dashboard.model";
 
 
 export const selectTimerMainDashboardFeatureState =

@@ -1,0 +1,16 @@
+<form [formGroup]="formGroup">
+  <p-autoComplete
+    class="accent"
+    formControlName="selectedProject"
+    [suggestions]="filteredProjects"
+    [dropdown]="true"
+    [minLength]="1"
+    [showEmptyMessage]="true"
+    [autoHighlight]="true"
+    field="name"
+    [showClear]="true"
+    (completeMethod)="projectsSearch($event)"
+    (onSelect)="projectSelected($event)"
+    (onBlur)="projectSelected($event)"
+  ></p-autoComplete>
+</form>

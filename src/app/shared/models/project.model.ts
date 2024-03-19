@@ -12,3 +12,13 @@ export interface Task {
   estimation: number;
   //dueDate: Date;
 }
+
+export interface ProjectAutocompleteQueryEvent {
+  originalEvent: Event;
+  query: string;
+}
+
+export interface ProjectAutocompleteSelectEvent {
+  originalEvent: Event;
+  value: Project;
+}

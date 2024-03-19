@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 
-import { ProjectsState } from "@app/models/timer-main-dashboard.model";
+import { ProjectsState } from "@app/shared/models/timer-main-dashboard.model";
 
 
-export const selectProjectFeatureState = 
+export const selectProjectFeatureState =
     createFeatureSelector<ProjectsState>('project');
 
 export const selectAllProjects = createSelector(

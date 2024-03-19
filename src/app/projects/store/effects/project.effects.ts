@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ProjectService } from "@services/projects.service";
 import { getAllProjects, getAllProjectsSuccess } from "../actions";
 import { map, switchMap, tap } from "rxjs";
-import { Project } from "@app/models/project.model";
-import { ProjectsState } from "@app/models/timer-main-dashboard.model";
+import { Project } from "@app/shared/models/project.model";
+import { ProjectsState } from "@app/shared/models/timer-main-dashboard.model";
 
 
 @Injectable()

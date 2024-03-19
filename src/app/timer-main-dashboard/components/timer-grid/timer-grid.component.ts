@@ -4,8 +4,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { TrackTaskDialogComponent } from '../track-task-dialog';
-import { TrackingBox } from '@app/models/timer-main-dashboard.model';
-import { Project } from '@app/models/project.model';
+import { TrackingBox } from '@app/shared/models/timer-main-dashboard.model';
+import { Project } from '@app/shared/models/project.model';
 
 
 @Component({

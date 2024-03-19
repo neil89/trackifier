@@ -6,7 +6,7 @@ import {
   setEndDateRange,
   setStartDateRange
 } from "../actions/timer-main-dashboard.actions";
-import { TimerMainDashboardState } from "src/app/models/timer-main-dashboard.model";
+import { TimerMainDashboardState } from "@app/shared/models/timer-main-dashboard.model";
 
 const initialTimerMainDashboardState: TimerMainDashboardState = {
   currentDate: new Date(),

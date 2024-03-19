@@ -1,4 +1,4 @@
-import { ProjectsState } from '@app/models/timer-main-dashboard.model';
+import { ProjectsState } from '@app/shared/models/timer-main-dashboard.model';
 export * from './reducers';
 export * from './actions';
 export * from './selectors';

@@ -4,7 +4,7 @@ import {
   getAllProjectsSuccess,
   getProjectByName
 } from "../actions/project.actions";
-import { ProjectsState } from "@app/models/timer-main-dashboard.model";
+import { ProjectsState } from "@app/shared/models/timer-main-dashboard.model";
 
 
 const initialProjectsState: ProjectsState = {

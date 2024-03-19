@@ -3,9 +3,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
-import { TimerMainDashboardState } from '@models/timer-main-dashboard.model';
+import { TimerMainDashboardState } from '@app/shared/models/timer-main-dashboard.model';
 import { ProjectService } from '@app/services/projects.service';
-import { Project } from '@app/models/project.model';
+import { Project } from '@app/shared/models/project.model';
 import {
   TimeViewFiltersComponent,
   RangeTimeSelectorComponent,

@@ -1,5 +1,5 @@
-import { Project } from "@app/models/project.model";
-import { ProjectsState } from "@app/models/timer-main-dashboard.model";
+import { Project } from "@app/shared/models/project.model";
+import { ProjectsState } from "@app/shared/models/timer-main-dashboard.model";
 import { createAction, props } from "@ngrx/store";
 
 

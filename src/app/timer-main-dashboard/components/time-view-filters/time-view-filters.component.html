@@ -10,7 +10,7 @@
       {{ 'timerMainDashboard.TOTAL-WEEK' | translate }}: {{ totalTimeWeek | duration }}
     </span>
     <div class="project-filter">
-      <form [formGroup]="formGroup">
+      <!-- <form [formGroup]="formGroup">
         <p-autoComplete
           class="accent"
           formControlName="selectedProject"
@@ -22,7 +22,11 @@
           field="name"
           (completeMethod)="projectSelected($event)"
         ></p-autoComplete>
-      </form>
+      </form> -->
+      <app-projects-dropdown
+        [projects]="projects"
+        (selectedProject)="projectSelected($event)"
+      />
     </div>
   </div>
 </section>

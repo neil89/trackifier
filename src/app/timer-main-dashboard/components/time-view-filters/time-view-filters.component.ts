@@ -1,29 +1,24 @@
 import { DatePipe, JsonPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DateTime } from 'luxon';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { DurationPipe } from '@pipes/duration.pipe';
-import { Project } from '@models/project.model';
+import { DurationPipe } from '@app/shared/pipes/duration.pipe';
+import { Project } from '@app/shared/models/project.model';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProjectsDropdownComponent } from '@app/shared/components/projects-dropdown/projects-dropdown.component';
 
-
-interface AutoCompleteCompleteEvent {
-  originalEvent: Event;
-  query: string;
-}
 
 @Component({
   selector: 'app-time-view-filters',
   standalone: true,
   imports: [
-    AutoCompleteModule,
     ReactiveFormsModule,
     DatePipe,
     DurationPipe,
     TranslateModule,
-    JsonPipe
+    JsonPipe,
+    ProjectsDropdownComponent
   ],
   templateUrl: './time-view-filters.component.html',
   styleUrl: './time-view-filters.component.scss'
@@ -47,21 +42,21 @@ export class TimeViewFiltersComponent implements OnInit {
     });
   }
 
-  projectSelected(ev: any) {
-    console.log(ev);
+  projectSelected(selectedProject: Project | null) {
+    //console.log(selectedProject);
 
-    if(!this.projects) {
-      return;
-    }
+    // if(!this.projects) {
+    //   return;
+    // }
 
-    let filtered: Project[] = [];
-    let query = ev.query;
-    for (let i = 0; i < this.projects.length; i++) {
-        let project = this.projects[i];
-        if (project.name.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
-            filtered.push(project);
-        }
-    }
-    this.filteredProjecs = filtered;
+    // let filtered: Project[] = [];
+    // let query = ev.query;
+    // for (let i = 0; i < this.projects.length; i++) {
+    //     let project = this.projects[i];
+    //     if (project.name.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
+    //         filtered.push(project);
+    //     }
+    // }
+    // this.filteredProjecs = filtered;
   }
 }

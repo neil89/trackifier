@@ -7,10 +7,11 @@ import { ToggleButtonChangeEvent, ToggleButtonModule } from 'primeng/togglebutto
 import { InputMask, InputMaskModule } from 'primeng/inputmask';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DateTime, Duration } from 'luxon';
-import { Time } from '@angular/common';
+import { JsonPipe, Time } from '@angular/common';
 
-import { Project } from '@app/models/project.model';
-import { TrackingBox } from '@app/models/timer-main-dashboard.model';
+import { Project } from '@app/shared/models/project.model';
+import { TrackingBox } from '@app/shared/models/timer-main-dashboard.model';
+import { ProjectsDropdownComponent } from '@app/shared/components/projects-dropdown/projects-dropdown.component';
 
 @Component({
   selector: 'app-track-task-dialog',
@@ -21,7 +22,9 @@ import { TrackingBox } from '@app/models/timer-main-dashboard.model';
     InputMaskModule,
     ToggleButtonModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    ProjectsDropdownComponent,
+    JsonPipe
   ],
   templateUrl: './track-task-dialog.component.html',
   styleUrl: './track-task-dialog.component.scss'
@@ -258,23 +261,12 @@ export class TrackTaskDialogComponent {
     }
   }
 
-  projectSelected(ev: any) {
-    console.log(ev);
 
-    if(!this.projects) {
-      return;
-    }
-
-    let filtered: Project[] = [];
-    let query = ev.query;
-    for (let i = 0; i < this.projects.length; i++) {
-        let project = this.projects[i];
-        if (project.name.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
-            filtered.push(project);
-        }
-    }
-    this.filteredProjecs = filtered;
+  projectSelected(selectedProject: Project | null) {
+    console.log(selectedProject);
+    this.formGroup.get('selectedProject')?.setValue(selectedProject);
   }
+
 
   public register(): void {
 
