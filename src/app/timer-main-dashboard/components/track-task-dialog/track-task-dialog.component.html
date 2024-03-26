@@ -15,7 +15,7 @@
       ></p-autoComplete> -->
       <app-projects-dropdown
         [projects]="projects"
-        (selectedProject)="projectSelected($event)"
+        (onProjectSelected)="projectSelected($event)"
       />
     </div>
 
@@ -89,6 +89,7 @@
 
     <div class="footer-buttons">
       <p-button
+        [disabled]="!formGroup.valid"
         icon="pi pi-stopwatch"
         [label]="translate.instant('timerMainDashboard.TRACK')"
         (click)="register()"

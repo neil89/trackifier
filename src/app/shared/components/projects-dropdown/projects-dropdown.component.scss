@@ -1,3 +1,8 @@
 :host ::ng-deep {
   width: 100%;
+
+  timesicon.p-element.p-icon-wrapper {
+    cursor: pointer;
+    pointer-events: auto;
+  }
 }

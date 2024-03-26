@@ -1,16 +1,15 @@
-<form [formGroup]="formGroup">
-  <p-autoComplete
-    class="accent"
-    formControlName="selectedProject"
-    [suggestions]="filteredProjects"
-    [dropdown]="true"
-    [minLength]="1"
-    [showEmptyMessage]="true"
-    [autoHighlight]="true"
-    field="name"
-    [showClear]="true"
-    (completeMethod)="projectsSearch($event)"
-    (onSelect)="projectSelected($event)"
-    (onBlur)="projectSelected($event)"
-  ></p-autoComplete>
-</form>
+<p-autoComplete
+  [(ngModel)]="selectedProject"
+  class="accent"
+  [suggestions]="filteredProjects"
+  [forceSelection]="forceSelection"
+  [dropdown]="true"
+  [minLength]="minLength"
+  [showEmptyMessage]="true"
+  [autoHighlight]="true"
+  field="name"
+  [showClear]="true"
+  (completeMethod)="projectsSearch($event)"
+  (onSelect)="projectSelected($event)"
+  (onBlur)="projectSelected($event)"
+></p-autoComplete>

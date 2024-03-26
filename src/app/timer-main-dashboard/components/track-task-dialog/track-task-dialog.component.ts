@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
@@ -66,19 +66,35 @@ export class TrackTaskDialogComponent {
   ngOnInit() {
 
     this.formGroup = new FormGroup({
-      selectedProject: new FormControl<Project | null>(null),
-
+      selectedProject: new FormControl<Project | null>(
+        null,
+        Validators.required
+      ),
       startTime: new FormControl<string | null>(
-        this.startDateTimeLuxon?.toFormat('HH:mm') || null
+        this.startDateTimeLuxon?.toFormat('HH:mm') || null,
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]{2}:[0-9]{2}$/)
+        ]
       ),
       lockStartTime: new FormControl<boolean>(false),
 
       endTime: new FormControl<string | null>(
-        this.endDateTimeLuxon?.toFormat('HH:mm') || null
+        this.endDateTimeLuxon?.toFormat('HH:mm') || null,
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]{2}:[0-9]{2}$/)
+        ]
       ),
       lockEndTime: new FormControl<boolean>(false),
 
-      duration: new FormControl<string | null>("00:15"),  // can be configured depending on zoom
+      duration: new FormControl<string | null>(
+        "00:15",      // can be configured depending on zoom
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]{2}:[0-9]{2}$/)
+        ]
+      ),
       lockDuration: new FormControl<boolean>(false),
     });
   }

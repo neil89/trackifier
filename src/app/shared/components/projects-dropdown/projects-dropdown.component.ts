@@ -6,7 +6,7 @@ import {
   ProjectAutocompleteQueryEvent,
   ProjectAutocompleteSelectEvent
 } from '@models/project.model';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -14,30 +14,26 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [
     AutoCompleteModule,
-    ReactiveFormsModule
+    FormsModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './projects-dropdown.component.html',
   styleUrl: './projects-dropdown.component.scss'
 })
-export class ProjectsDropdownComponent implements OnInit{
+export class ProjectsDropdownComponent {
+
+  @Input() public forceSelection: boolean = true;
+  @Input() public minLength: number = 1;
 
   @Input() public projects: Project[] | null = [];
+  selectedProject: Project | null = null;
   filteredProjects: Project[] = [];
 
-  @Output() public selectedProject: EventEmitter<Project | null> =
+  @Output() public onProjectSelected: EventEmitter<Project | null> =
     new EventEmitter<Project | null>();
 
-  formGroup!: FormGroup;
-
-  ngOnInit() {
-    this.formGroup = new FormGroup({
-      selectedProject: new FormControl<Project | null>(null)
-    });
-  }
 
   projectsSearch(ev: ProjectAutocompleteQueryEvent) {
-    //console.log(ev);
 
     if(!this.projects) {
       return;
@@ -55,17 +51,6 @@ export class ProjectsDropdownComponent implements OnInit{
   }
 
   projectSelected(ev: ProjectAutocompleteSelectEvent | Event | undefined) {
-    console.log('projectSelected');
-    console.log(ev);
-    console.log(this.formGroup.get('selectedProject')?.value);
-    console.log("----");
-
-    // if(!ev) {
-    //   this.selectedProject.emit(null);
-    // }
-    // else if(ev as ProjectAutocompleteSelectEvent) {
-    //   ev = ev as ProjectAutocompleteSelectEvent;
-    //   this.selectedProject.emit(ev.value as Project);
-    // }
+    this.onProjectSelected.emit(this.selectedProject)
   }
 }

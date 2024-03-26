@@ -43,20 +43,6 @@ export class TimeViewFiltersComponent implements OnInit {
   }
 
   projectSelected(selectedProject: Project | null) {
-    //console.log(selectedProject);
-
-    // if(!this.projects) {
-    //   return;
-    // }
-
-    // let filtered: Project[] = [];
-    // let query = ev.query;
-    // for (let i = 0; i < this.projects.length; i++) {
-    //     let project = this.projects[i];
-    //     if (project.name.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
-    //         filtered.push(project);
-    //     }
-    // }
-    // this.filteredProjecs = filtered;
+    console.log(selectedProject);
   }
 }

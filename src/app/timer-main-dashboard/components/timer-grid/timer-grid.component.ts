@@ -50,17 +50,6 @@ export class TimerGridComponent implements OnInit {
     });
   }
 
-  // ngAfterViewInit(): void {
-  //   debugger;
-  //   this.divisionSlot.changes.subscribe((divisionSlot: QueryList<ElementRef>) => {
-  //     if(divisionSlot.length > 0) {
-  //       divisionSlot.forEach((slot: ElementRef) => {
-  //         this.renderer.listen(slot.nativeElement, 'click', (ev: MouseEvent) => this.show(ev));
-  //       });
-  //     }
-  //   });
-  // }
-
   public show(ev: MouseEvent): void {
     const selectedHour: string | null = (ev.target as HTMLElement)?.getAttribute('data-hour');
     const selectedDivision: string | null = (ev.target as HTMLElement)?.getAttribute('data-division');
@@ -122,7 +111,7 @@ export class TimerGridComponent implements OnInit {
     this.renderer.setStyle(trackingBox, 'left', left + 'px');
     this.renderer.setStyle(trackingBox, 'width', width + 'px');
     this.renderer.setStyle(trackingBox, 'height', height + 'px');
-    this.renderer.setStyle(trackingBox, 'background-color', 'rgba(248, 170, 31, 0.6)');
+    this.renderer.setStyle(trackingBox, 'background-color', '#f8aa1f');
     this.renderer.setStyle(trackingBox, 'border', '1px solid #f8aa1f');
     this.renderer.appendChild(document.body, trackingBox);
 

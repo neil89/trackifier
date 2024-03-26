@@ -5,6 +5,10 @@ export interface Project {
   tasks?: Task[];
 }
 
+// color:
+//  QUANTEXA #512288
+//  IGLOO #94def1
+
 export interface Task {
   id: string;
   name: string;
